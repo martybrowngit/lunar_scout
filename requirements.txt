@@ -4,3 +4,4 @@ numpy
 apscheduler
 python-dotenv   # optional, for local .env testing
 pytz            # timezone helpers (optional; zoneinfo used if available)
+pyephem
