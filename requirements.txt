@@ -1,0 +1,6 @@
+discord.py>=2.3.0
+skyfield
+numpy
+apscheduler
+python-dotenv   # optional, for local .env testing
+pytz            # timezone helpers (optional; zoneinfo used if available)
