@@ -48,7 +48,7 @@ async def on_ready():
     # Schedule the daily full moon check (UTC 10:00am example)
     scheduler.add_job(
         check_full_moon, 
-        trigger=CronTrigger(hour=9, minute=0, timezone=adelaide_tz)
+        trigger=CronTrigger(hour=9, minute=0, timezone=adelaide_tz),
         id="full_moon_job",
         replace_existing=True)
 
