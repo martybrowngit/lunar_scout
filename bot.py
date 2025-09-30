@@ -16,7 +16,7 @@ LAT = '-34.9285'
 LON = '138.6007'
 
 # Channel ID to send messages to
-CHANNEL_ID = int(os.getenv("1073044405981806694", "0"))
+CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID", "0"))
 
 # Setup bot
 intents = discord.Intents.default()
@@ -37,6 +37,16 @@ async def check_full_moon():
         if channel:
             await channel.send("🌕 It's a full moon tonight!")
 
+@bot.command(name="moon")
+async def moon_command(ctx):
+    phase = get_moon_phase()
+    if phase >= 99.5:
+        await ctx.send("🌕 Yes! Tonight is a full moon.")
+    elif phase <= 0.5:
+        await ctx.send("🌑 It's a new moon tonight.")
+    else:
+        await ctx.send(f"🌙 The moon phase today is **{phase:.1f}% illuminated**.")
+        
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user}')
