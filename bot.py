@@ -26,7 +26,8 @@ intents.message_content = True # This hopefully fixes populates the content of t
 bot = commands.Bot(command_prefix="!", intents=intents)
 scheduler = AsyncIOScheduler()
 
-def is_full_moon_today():
+
+def get_moon_phase():
     obs = ephem.Observer()
     obs.lat = LAT
     obs.lon = LON
@@ -34,6 +35,9 @@ def is_full_moon_today():
     moon_phase = ephem.Moon(obs).phase
     return moon_phase >= 99.5
 
+def is_full_moon_today():
+    return get_moon_phase() >= 99.5
+    
 async def check_full_moon():
     if is_full_moon_today():
         channel = bot.get_channel(CHANNEL_ID)
