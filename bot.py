@@ -33,11 +33,11 @@ def get_moon_phase():
     obs.lon = LON
     obs.date = datetime.datetime.utcnow().strftime("%Y/%m/%d %H:%M:%S")
     moon_phase = ephem.Moon(obs).phase
-    return moon_phase >= 99.5
+    return moon_phase
 
 def is_full_moon_today():
-    return get_moon_phase() >= 99.5
-    
+    return get_moon_phase() >= 98
+
 async def check_full_moon():
     if is_full_moon_today():
         channel = bot.get_channel(CHANNEL_ID)
@@ -47,9 +47,9 @@ async def check_full_moon():
 @bot.command(name="moon")
 async def moon_command(ctx):
     phase = get_moon_phase()
-    if phase >= 99.5:
+    if is_full_moon_today():
         await ctx.send("🌕 Yes! Tonight is a full moon.")
-    elif phase <= 0.5:
+    elif phase <= 2:
         await ctx.send("🌑 It's a new moon tonight.")
     else:
         await ctx.send(f"🌙 The moon phase today is **{phase:.1f}% illuminated**.")
