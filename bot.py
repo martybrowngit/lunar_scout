@@ -20,6 +20,9 @@ CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID", "0"))
 
 # Setup bot
 intents = discord.Intents.default()
+
+intents.message_content = True # This hopefully fixes populates the content of the message lol
+
 bot = commands.Bot(command_prefix="!", intents=intents)
 scheduler = AsyncIOScheduler()
 
@@ -46,7 +49,7 @@ async def moon_command(ctx):
         await ctx.send("🌑 It's a new moon tonight.")
     else:
         await ctx.send(f"🌙 The moon phase today is **{phase:.1f}% illuminated**.")
-        
+
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user}')
